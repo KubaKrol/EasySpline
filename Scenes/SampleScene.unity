@@ -204,50 +204,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1468751404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1468751406}
-  - component: {fileID: 1468751405}
-  m_Layer: 0
-  m_Name: Spline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1468751405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468751404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722e6ee660477e3458eec1881b981ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stepsPerCurve: 100
---- !u!4 &1468751406
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468751404}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.13, y: -0.09, z: -6.64}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546897464
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,3 +296,181 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2130054076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130054078}
+  - component: {fileID: 2130054077}
+  m_Layer: 0
+  m_Name: Spline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2130054077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130054076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722e6ee660477e3458eec1881b981ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepsPerCurve: 100
+  myBezierSpline:
+    myCurves:
+    - id: 0
+    - id: 1
+    - id: 2
+    - id: 3
+  references:
+    version: 1
+    00000000:
+      type: {class: CubicBezierCurve, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        anchor0:
+          id: 4
+        control0:
+          id: 5
+        control1:
+          id: 6
+        anchor1:
+          id: 7
+        stepSize: 0
+    00000001:
+      type: {class: CubicBezierCurve, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        anchor0:
+          id: 7
+        control0:
+          id: 8
+        control1:
+          id: 9
+        anchor1:
+          id: 10
+        stepSize: 0
+    00000002:
+      type: {class: CubicBezierCurve, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        anchor0:
+          id: 10
+        control0:
+          id: 11
+        control1:
+          id: 12
+        anchor1:
+          id: 13
+        stepSize: 0
+    00000003:
+      type: {class: CubicBezierCurve, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        anchor0:
+          id: 13
+        control0:
+          id: 14
+        control1:
+          id: 15
+        anchor1:
+          id: 16
+        stepSize: 0
+    00000004:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -9.979847, y: 0, z: 3.1928635}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000005:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -2.361187, y: 0, z: -2.885323}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000006:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: 6.294056, y: 0, z: 2.1630516}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000007:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: 7.549873, y: 0, z: 8.40539}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000008:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: 8.474196, y: 0, z: 15.157345}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000009:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: 6.485752, y: 0, z: 17.14193}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000A:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: 0.7342167, y: 0, z: 13.245956}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000B:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -5.294059, y: 0, z: 10.7549095}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000C:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -5.150524, y: 0, z: 16.303299}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000D:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -10.922961, y: 0, z: 17.563553}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000E:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -16.39668, y: -0.72125244, z: 20.199034}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    0000000F:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -24.173086, y: 0, z: 25.215109}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+    00000010:
+      type: {class: ControlPoint, ns: EasySpline, asm: Assembly-CSharp}
+      data:
+        position: {x: -16.731024, y: 0, z: 35.43077}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        scale: {x: 1, y: 1, z: 1}
+--- !u!4 &2130054078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130054076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.78, y: 0, z: -0.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -58,10 +58,10 @@ namespace EasySpline
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void DeleteAnchor(int anchorIndex)
         {
-            if (anchorIndex < 0 || anchorIndex > myCurves.Count * 2)
+            if (anchorIndex < 0 || anchorIndex > myCurves.Count)
                 throw new ArgumentOutOfRangeException("anchorIndex", "Out of range");
 
-            if (anchorIndex > 0 && anchorIndex < (myCurves.Count * 2) - 1)
+            if (anchorIndex > 0 && anchorIndex < myCurves.Count)
             {
                 var adjacentCurvesIndexes = new[] {anchorIndex - 1, anchorIndex};
 
@@ -83,7 +83,7 @@ namespace EasySpline
                 {
                     myCurves.RemoveAt(0);
                 }
-                if (anchorIndex == (myCurves.Count * 2) - 1)
+                if (anchorIndex == myCurves.Count)
                 {
                     myCurves.RemoveAt(myCurves.Count - 1);
                 }
