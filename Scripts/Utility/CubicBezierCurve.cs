@@ -9,10 +9,10 @@ namespace EasySpline
     [System.Serializable]
     public class CubicBezierCurve
     {
-        public Vector3 anchor0;
-        public Vector3 control0;
-        public Vector3 control1;
-        public Vector3 anchor1;
+        [SerializeReference] public ControlPoint anchor0;
+        [SerializeReference] public ControlPoint control0;
+        [SerializeReference] public ControlPoint control1;
+        [SerializeReference] public ControlPoint anchor1;
 
         public int stepSize;
 
@@ -21,13 +21,13 @@ namespace EasySpline
         /// </summary>
         public CubicBezierCurve()
         {
-            anchor0 = new Vector3(0f, 0f, 0f);
-            control0 = new Vector3(3f, 0f, 0f);
-            control1 = new Vector3(3f, 0f, 5f);
-            anchor1 = new Vector3(0f, 0f, 5f);
+            anchor0 = new ControlPoint(new Vector3(0f, 0f, 0f));
+            control0 = new ControlPoint(new Vector3(3f, 0f, 0f));
+            control1 = new ControlPoint(new Vector3(3f, 0f, 5f));
+            anchor1 = new ControlPoint(new Vector3(0f, 0f, 5f));
         }
         
-        public CubicBezierCurve(Vector3 anchor0, Vector3 control0, Vector3 control1, Vector3 anchor1)
+        public CubicBezierCurve(ControlPoint anchor0, ControlPoint control0, ControlPoint control1, ControlPoint anchor1)
         {
             this.anchor0 = anchor0;
             this.control0 = control0;
@@ -42,7 +42,7 @@ namespace EasySpline
         /// <returns></returns>
         public Vector3 GetPosition(float t)
         {
-            return MathUtility.CubicBezierPoint(anchor0, control0, control1, anchor1, t);
+            return MathUtility.CubicBezierPoint(anchor0.position, control0.position, control1.position, anchor1.position, t);
         }
 
         /// <summary>

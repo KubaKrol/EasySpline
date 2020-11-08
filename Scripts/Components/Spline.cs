@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace EasySpline
 {
@@ -12,27 +13,32 @@ namespace EasySpline
         [Range(1, 200)]
         private int stepsPerCurve = 100;
 
-        public BezierSpline myBezierSpline { get; private set; }
+        [SerializeField] public BezierSpline myBezierSpline;
+
+        private float t = 0f;
         
+        /// <summary>
+        /// temporary
+        /// </summary>
         private void Update()
         {
-            if (myBezierSpline == null)
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                myBezierSpline = new BezierSpline(stepsPerCurve);
+                t += Time.deltaTime;
+                if (t > 1f)
+                {
+                    t = 0f;
+                }
             }
+        }
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                AddCurveFront();
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                AddCurveBack();
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ResetSpline();
-            }
+        /// <summary>
+        /// temporary
+        /// </summary>
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(myBezierSpline.GetPosition(t), 1f);
         }
 
         public void AddCurveFront()
@@ -45,9 +51,14 @@ namespace EasySpline
             myBezierSpline.AddCurveBack();
         }
 
+        public void DeleteAnchor(int anchorIndex)
+        {
+            myBezierSpline.DeleteAnchor(anchorIndex);
+        }
+
         public void ResetSpline()
         {
-            myBezierSpline = new BezierSpline(stepsPerCurve);
+            myBezierSpline = new BezierSpline();
         }
     }   
 }
