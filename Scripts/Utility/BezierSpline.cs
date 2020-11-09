@@ -11,12 +11,14 @@ namespace EasySpline
     public class BezierSpline
     {
         [SerializeReference] public List<CubicBezierCurve> myCurves;
+        [SerializeReference] public List<ControlPoint> allControlPoints;
 
         public BezierSpline()
         {
             myCurves = new List<CubicBezierCurve>();
             var initialCurve = new CubicBezierCurve();
             myCurves.Add(initialCurve);
+            UpdateControlPointsList();
         }
         
         /// <summary>
@@ -27,12 +29,13 @@ namespace EasySpline
             var lastCurve = myCurves[myCurves.Count-1];
             
             var newAnchor0 = lastCurve.anchor1;
-            var newControl0 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized);
-            var newControl1 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized * 2f);
-            var newAnchor1 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized * 3f);
+            var newControl0 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized * 4f);
+            var newControl1 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized * 8f);
+            var newAnchor1 = new ControlPoint(lastCurve.anchor1.position + lastCurve.GetDirection(1f).normalized * 12f);
             
             var newCurve = new CubicBezierCurve(newAnchor0, newControl0, newControl1, newAnchor1);
             myCurves.Add(newCurve);
+            UpdateControlPointsList();
         }
         
         /// <summary>
@@ -42,13 +45,14 @@ namespace EasySpline
         {
             var lastCurve = myCurves[0];
             
-            var newAnchor0 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized * 3f);
-            var newControl0 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized * 2f);
-            var newControl1 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized);
+            var newAnchor0 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized * 12f);
+            var newControl0 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized * 8f);
+            var newControl1 = new ControlPoint(lastCurve.anchor0.position - lastCurve.GetDirection(0f).normalized * 4f);
             var newAnchor1 = lastCurve.anchor0;
             
             var newCurve = new CubicBezierCurve(newAnchor0, newControl0, newControl1, newAnchor1);
             myCurves.Insert(0, newCurve);
+            UpdateControlPointsList();
         }
 
         /// <summary>
@@ -88,6 +92,7 @@ namespace EasySpline
                     myCurves.RemoveAt(myCurves.Count - 1);
                 }
             }
+            UpdateControlPointsList();
         }
 
         /// <summary>
@@ -109,28 +114,52 @@ namespace EasySpline
             
             float curveIndex = t * myCurves.Count;
 
-            if (Mathf.FloorToInt(curveIndex) > 0 && Mathf.FloorToInt(curveIndex) < myCurves.Count - 1)
-            {
-                float startingValue = (float)Mathf.FloorToInt(curveIndex) / myCurves.Count;
-                float endingValue = ((Mathf.FloorToInt(curveIndex) + 1f) / myCurves.Count);
-                return myCurves[Mathf.FloorToInt(curveIndex)].GetPosition(Mathf.InverseLerp(startingValue, endingValue, t));
-            }
+            float startingValue = (float)Mathf.FloorToInt(curveIndex) / myCurves.Count;
+            float endingValue = ((Mathf.FloorToInt(curveIndex) + 1f) / myCurves.Count);
+            return myCurves[Mathf.FloorToInt(curveIndex)].GetPosition(Mathf.InverseLerp(startingValue, endingValue, t));
+        }
 
-            if (Mathf.FloorToInt(curveIndex) == 0)
-            {
-                float startingValue = 0f;
-                float endingValue = 1f / myCurves.Count;
-                return myCurves[Mathf.FloorToInt(curveIndex)].GetPosition(Mathf.InverseLerp(startingValue, endingValue, t));
-            }
+        
+        /// <summary>
+        /// Adjacent control points of an anchor
+        /// </summary>
+        /// <param name="anchor"></param>
+        /// <returns></returns>
+        public ControlPoint[] GetAnchorControlPoints(ControlPoint anchor)
+        {
+            if (!allControlPoints.Contains(anchor))
+                return null;
 
-            if (Mathf.FloorToInt(curveIndex) == myCurves.Count - 1)
-            {
-                float startingValue = (myCurves.Count - 1f) / myCurves.Count;
-                float endingValue = 1f;
-                return myCurves[Mathf.FloorToInt(curveIndex)].GetPosition(Mathf.InverseLerp(startingValue, endingValue, t));
-            }
+            var index = allControlPoints.IndexOf(anchor);
+            if (index == 0)
+                return new[] {allControlPoints[1]};
+
+            return index == allControlPoints.Count - 1 ? new[] {allControlPoints[allControlPoints.Count - 2]} : new[] {allControlPoints[index - 1], allControlPoints[index + 1]};
+        }
+
+
+        private void UpdateControlPointsList()
+        {
+            if (allControlPoints == null)
+                allControlPoints = new List<ControlPoint>();
             
-            return Vector3.zero;
+            allControlPoints.Clear();
+            
+            for (int i = 0; i < myCurves.Count; i++)
+            {
+                AddControlPointToList(myCurves[i].anchor0);
+                AddControlPointToList(myCurves[i].control0);
+                AddControlPointToList(myCurves[i].control1);
+                AddControlPointToList(myCurves[i].anchor1);
+            }
+        }
+
+        private void AddControlPointToList(ControlPoint controlPoint)
+        {
+            if (!allControlPoints.Contains(controlPoint))
+            {
+                allControlPoints.Add(controlPoint);
+            }
         }
     }   
 }
