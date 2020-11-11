@@ -27,6 +27,14 @@ namespace EasySpline
             anchor1 = new ControlPoint(new Vector3(0f, 0f, 5f));
         }
         
+        public CubicBezierCurve(Vector3 position)
+        {
+            anchor0 = new ControlPoint(new Vector3(position.x - 8f, position.y + 0f, position.z - 10f));
+            control0 = new ControlPoint(new Vector3(position.x, position.y + 0f, position.z - 10f));
+            control1 = new ControlPoint(new Vector3(position.x, position.y + 0f, position.z + 10f));
+            anchor1 = new ControlPoint(new Vector3(position.x + 8f, position.y + 0f, position.z + 10f));
+        }
+        
         public CubicBezierCurve(ControlPoint anchor0, ControlPoint control0, ControlPoint control1, ControlPoint anchor1)
         {
             this.anchor0 = anchor0;

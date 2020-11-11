@@ -22,7 +22,7 @@ namespace EasySpline
         /// </summary>
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKey(KeyCode.P))
             {
                 t += Time.deltaTime;
                 if (t > 1f)
@@ -51,14 +51,9 @@ namespace EasySpline
             myBezierSpline.AddCurveBack();
         }
 
-        public void DeleteAnchor(int anchorIndex)
+        public void DeleteAnchor(ControlPoint controlPoint)
         {
-            myBezierSpline.DeleteAnchor(anchorIndex);
-        }
-
-        public void ResetSpline()
-        {
-            myBezierSpline = new BezierSpline();
+            myBezierSpline.DeleteAnchor(controlPoint);
         }
     }   
 }

@@ -21,6 +21,14 @@ namespace EasySpline
             UpdateControlPointsList();
         }
         
+        public BezierSpline(Vector3 position)
+        {
+            myCurves = new List<CubicBezierCurve>();
+            var initialCurve = new CubicBezierCurve(position);
+            myCurves.Add(initialCurve);
+            UpdateControlPointsList();
+        }
+        
         /// <summary>
         /// Add new curve to the front of the spline
         /// </summary>
@@ -60,8 +68,13 @@ namespace EasySpline
         /// </summary>
         /// <param name="anchorIndex"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void DeleteAnchor(int anchorIndex)
+        public void DeleteAnchor(ControlPoint anchor)
         {
+            if (allControlPoints.Count <= 4)
+                return;
+            
+            var anchorIndex = allControlPoints.IndexOf(anchor) / 3;
+            
             if (anchorIndex < 0 || anchorIndex > myCurves.Count)
                 throw new ArgumentOutOfRangeException("anchorIndex", "Out of range");
 
