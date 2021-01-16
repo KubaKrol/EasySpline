@@ -132,6 +132,23 @@ namespace EasySpline
             return myCurves[Mathf.FloorToInt(curveIndex)].GetPosition(Mathf.InverseLerp(startingValue, endingValue, t));
         }
 
+        /// <summary>
+        /// t [0,1] - spline progress
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public Vector3 GetDirection(float t)
+        {
+            if(t < 0 || t > 1f)
+                throw new ArgumentOutOfRangeException("t", "out of range");
+            
+            float curveIndex = t * myCurves.Count;
+
+            float startingValue = (float)Mathf.FloorToInt(curveIndex) / myCurves.Count;
+            float endingValue = ((Mathf.FloorToInt(curveIndex) + 1f) / myCurves.Count);
+            return myCurves[Mathf.FloorToInt(curveIndex)].GetDirection(Mathf.InverseLerp(startingValue, endingValue, t));    
+        }
         
         /// <summary>
         /// Adjacent control points of an anchor

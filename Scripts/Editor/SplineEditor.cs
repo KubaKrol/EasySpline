@@ -18,6 +18,7 @@ namespace EasySpline
         private ControlPoint selectedControlPoint;
         private int selectedAnchorIndex = 0;
 
+        private bool showDirections = false;
         private bool mirroredControlPoints = true;
         private bool rotatingAnchors;
         private bool showMainHandle = true;
@@ -53,6 +54,7 @@ namespace EasySpline
 
             GUILayout.EndHorizontal();
 
+            showDirections = EditorGUILayout.Toggle("Show directions", showDirections);
             mirroredControlPoints = EditorGUILayout.Toggle("Mirrored control points", mirroredControlPoints);
             rotatingAnchors = EditorGUILayout.Toggle("Rotating anchors", rotatingAnchors);
             showMainHandle = EditorGUILayout.Toggle("Show Main Handle", showMainHandle);
@@ -83,7 +85,10 @@ namespace EasySpline
         private void OnSceneGUI()
         {
             DrawSpline();
-            //DrawSplineDirections(5);
+            
+            if(showDirections)
+                DrawSplineDirections(5);
+            
             DrawAllSplineHandles();
             CheckKeyboardInput();
             
@@ -132,7 +137,7 @@ namespace EasySpline
                 {
                     Handles.color = Color.green;
                     var t = Mathf.InverseLerp(0f, stepSize, j);
-                    Handles.DrawLine(currentCurve.GetPosition(t), currentCurve.GetPosition(t) + currentCurve.GetDirection(t) * 10f);
+                    Handles.DrawLine(currentCurve.GetPosition(t), currentCurve.GetPosition(t) + currentCurve.GetDirection(t) * 20f);
                 }
             }
         }
@@ -222,18 +227,6 @@ namespace EasySpline
             {
                 case EventType.KeyDown:
                 {
-                    /*if (Event.current.keyCode == (KeyCode.E))
-                    {
-                        rotating = true;
-                        e.Use();
-                    }
-
-                    if (Event.current.keyCode == (KeyCode.W))
-                    {
-                        rotating = false;
-                        e.Use();
-                    }*/
-                    
                     if (Event.current.keyCode == (KeyCode.M))
                     {
                         if (mirroredControlPoints)
